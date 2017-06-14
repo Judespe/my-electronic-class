@@ -1,0 +1,31 @@
+td {
+	padding: 10px 20px;
+	background-color: #fff;
+}
+
+.student_avatar_name {
+	display: inline-flex;
+	align-items: center;
+}
+
+.avatar {
+	width: 60px;
+	height: 60px;
+	border-radius: 50%;
+  background-position: center center;
+  background-size: cover;
+  margin-right: 20px;
+}
+
+.avatar-default {
+	background: url(../assets/img/default-avatar.png);
+}
+
+span.lastName {
+	margin-right: 5px;
+	text-transform: uppercase;
+}
+
+td.col-xs-6, td.col-xs-5 {
+	border-bottom: 1px solid #eee;
+}

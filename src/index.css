@@ -1,0 +1,109 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.aligncenter {
+	text-align: center;
+}
+
+button {
+	font-family: 'Alegreya Sans SC', sans-serif;
+	border: 2px solid #2cb187;
+	color: #2cb187;
+	background-color: #fff;
+	margin: 0px 20px;
+	padding: 10px;
+	font-size: 1.1em;
+	vertical-align: middle;
+}
+
+button.inverse {
+	border: 2px solid #2cb187;
+	color: #fff;
+	background-color: #2cb187;
+	float: right;
+}
+
+button span {
+	margin-right: 5px;
+	vertical-align: middle;
+	padding-bottom: 3px;
+}
+
+button.disabled {
+	border: 2px solid #ccc;
+	color: #ccc;
+	background-color: #fff;
+}
+
+button.btn_danger {
+	border: 2px solid #d9534f;
+	color: #d9534f;
+}
+
+button.btn_alert {
+	border: 2px solid #f0ad4e;
+	color: #f0ad4e;
+}
+
+/*------------- Student Form -------------*/
+
+.form-background {
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgba(0,0,0,0.4);
+  // margin: 0 -21px;
+}
+
+.form-container {
+	width: 50%;
+	margin-left: auto;
+  margin-right: auto;
+  padding: 20px;
+  background: #fff;
+  top: 50%;
+  position: relative;
+  transform: translateY(-52%);
+ }
+
+#studentForm {
+	padding: 40px;
+	text-align: center;
+}
+
+.inline-field {
+	display: flex;
+	align-items: center;
+  padding: 10px 0px;
+}
+
+.inline-field input {
+	width: 100%;
+	margin: 5px 0px;
+}
+
+.inline-field span {
+	float: left;
+	padding: 0px 5px;
+}
+
+#close_window {
+	float: right;
+  padding: 0 5px;
+  margin: 0px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.h3-like {
+  padding: 60px 60px 0px 60px;
+  font-size: 20px;
+  color: #2cb187;
+}
