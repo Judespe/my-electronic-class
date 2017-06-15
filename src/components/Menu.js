@@ -1,13 +1,28 @@
 import React from 'react';
+
 import './Menu.css';
 
 const Menu = props => {
 
-	const { setFormVisibility } = props;
+	const { 
+		selectedData,
+		deleteStudent, 
+		setFormVisibility } = props;
+
+	let isSelectedData = selectedData.size > 0;
+
+	const deleteSelection = data => {
+		data.map(student => {
+			deleteStudent(student.toJS().id);
+		});
+	}
 
 	return(
 		<div id="action_bar" className="container-fluid">
-			<button type="button"><span className="glyphicon glyphicon-trash"></span> supprimer la sélection</button>
+			<button 
+				type="button" 
+				disabled={!isSelectedData}
+				onClick={()=>{deleteSelection(selectedData)}}><span className="glyphicon glyphicon-trash"></span> supprimer la sélection</button>
 			<button 
 				type="button" 
 				className="inverse"
@@ -17,6 +32,5 @@ const Menu = props => {
 		</div>
 	);
 }
-			// <button type="button"><span className="glyphicon glyphicon-send"></span> renvoyer l'invitation</button>
 
 export default Menu;

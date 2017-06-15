@@ -1,5 +1,4 @@
 import React from 'react';
-import { size } from 'immutable';
 
 import Header from './Header';
 import Menu from './Menu';
@@ -10,9 +9,24 @@ import './StudentsTable.css';
 
 let StudentsTable = props => {
 
-	const { students, formVisibility, tmpData, editStudent, updateForm, addStudent, deleteStudent, setFormVisibility } = props;
+	const { 
+		students, 
+		formVisibility, 
+		tmpData, 
+		selectedData,
+		editStudent, 
+		updateForm, 
+		addStudent, 
+		deleteStudent, 
+		selectStudent, 
+		unselectStudent,
+		toggleSelectAll,
+		setFormVisibility } = props;
 
 	let isTmpData = tmpData.length > 0;
+		let isSelectedData = selectedData.size > 0;
+	if (selectedData) {
+	}
 
 	const saveForm = values => {
 		if (!isTmpData) {
@@ -26,13 +40,21 @@ let StudentsTable = props => {
 	return(
     <div className="content">
       <Header />
-      <Menu setFormVisibility={setFormVisibility}/>
+      <Menu
+      	selectedData={selectedData}
+      	deleteStudent={deleteStudent} 
+      	setFormVisibility={setFormVisibility}/>
 			<div id='table_container' className="container-fluid">
 				<table className="container">
 					<thead>
 						<tr className="row">
 							<th className="col-xs-1 aligncenter">
-								<input type="checkbox" name="select_all" id="select_all" className="checkbox_custom" />
+								<input 
+									type="checkbox" 
+									name="select_all" 
+									id="select_all" 
+									className="checkbox_custom"
+									onChange={isSelectedData ? ()=>toggleSelectAll('UNSELECT') : ()=>toggleSelectAll('SELECT')} />
 								<label htmlFor="select_all" className="checkbox_custom_label" ></label>
 							</th>
 							<th className="col-xs-6">NOM</th>
@@ -43,6 +65,8 @@ let StudentsTable = props => {
 						{students.map(student => (
 							<Student key={student.get('id')}
 								student={student.toJS()}
+								selectStudent={selectStudent}
+								unselectStudent={unselectStudent}
 								updateForm={updateForm}
 								deleteStudent={deleteStudent} />
 						))}

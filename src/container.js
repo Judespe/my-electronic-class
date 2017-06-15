@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 
 import StudentsTable from './components/StudentsTable';
-import { editStudent, updateForm, addStudent, deleteStudent, setFormVisibility } from './actions';
+import { setFormVisibility, editStudent, updateForm, addStudent, deleteStudent, selectStudent, unselectStudent, toggleSelectAll } from './actions';
 
 
 const StudentsContainer = connect(
@@ -9,16 +9,20 @@ const StudentsContainer = connect(
 		return { 
 			formVisibility: state.reducer.formVisibility,
 			students: state.reducer.students,
-			tmpData: state.reducer.tmpData
+			tmpData: state.reducer.tmpData,
+			selectedData: state.reducer.selectedData
 		};
 	},
 	function mapDispatchToProps(dispatch) {
 		return {
+			setFormVisibility: filter => dispatch(setFormVisibility(filter)),
 			editStudent: data => dispatch(editStudent(data)),
 			updateForm: id => dispatch(updateForm(id)),
 			addStudent: data => dispatch(addStudent(data)),
 			deleteStudent: id => dispatch(deleteStudent(id)),
-			setFormVisibility: filter => dispatch(setFormVisibility(filter))
+			selectStudent: data => dispatch(selectStudent(data)),
+			unselectStudent: data => dispatch(unselectStudent(data)),
+			toggleSelectAll: filter => dispatch(toggleSelectAll(filter))
 		};
 	}
 )(StudentsTable);

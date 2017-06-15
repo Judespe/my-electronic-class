@@ -4,7 +4,12 @@ import './Student.css';
 
 const Student = props => {
 
-	const { student, updateForm, deleteStudent } = props;
+	const { 
+		student, 
+		updateForm, 
+		deleteStudent, 
+		selectStudent,
+		unselectStudent } = props;
 
 	const avatar = student.avatar;
 	const style = {
@@ -14,7 +19,12 @@ const Student = props => {
 	return(
 		<tr className="row">
 			<td className="col-xs-1 aligncenter">
-				<input type="checkbox" id={"toggle" + student.id} className="checkbox_custom_reverse" />
+				<input 
+					type="checkbox" 
+					id={"toggle" + student.id} 
+					className="checkbox_custom_reverse"
+					onChange={student.isSelected ? ()=>unselectStudent(student) : ()=>selectStudent(student)}
+					checked={student.isSelected} />
 				<label 
 					htmlFor={"toggle" + student.id} 
 					className="checkbox_custom_reverse_label">

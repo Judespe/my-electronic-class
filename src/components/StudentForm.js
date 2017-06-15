@@ -1,5 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import PropTypes from 'prop-types';
 
@@ -37,10 +36,8 @@ const validate = values => {
 let StudentForm = props => {
 
 	const {
-		initialValues,
 		handleSubmit,
-		setFormVisibility
-	} = props;
+		setFormVisibility	} = props;
 
 	return(
 		<div className="form-background">

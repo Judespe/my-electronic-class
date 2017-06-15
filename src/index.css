@@ -19,6 +19,12 @@ button {
 	vertical-align: middle;
 }
 
+button:disabled {
+	border: 2px solid #ddd;
+	color: #ddd;
+	cursor: not-allowed;
+}
+
 button.inverse {
 	border: 2px solid #2cb187;
 	color: #fff;
@@ -46,6 +52,10 @@ button.btn_danger {
 button.btn_alert {
 	border: 2px solid #f0ad4e;
 	color: #f0ad4e;
+}
+
+input[type=checkbox] {
+	cursor: pointer;
 }
 
 /*------------- Student Form -------------*/

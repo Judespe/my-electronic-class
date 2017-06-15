@@ -5,6 +5,18 @@ export const FormVisibilityFilter = {
 	HIDE_FORM: 'HIDE_FORM'
 }
 
+export const SelectionFilter = {
+	SELECT: 'SELECT',
+	UNSELECT: 'UNSELECT'
+}
+
+export function setFormVisibility(filter) {
+	return {
+		type: 'SET_FORM_VISIBILITY',
+		filter
+	};
+}
+
 export function addStudent(student) {
 	return {
 		type: 'ADD_STUDENT',
@@ -35,9 +47,25 @@ export function editStudent(student) {
 	};
 }
 
-export function setFormVisibility(filter) {
+export function selectStudent(student) {
 	return {
-		type: 'SET_FORM_VISIBILITY',
-		filter
+		type: 'SELECT_STUDENT',
+		student: student,
+		id: student.id
 	};
+}
+
+export function unselectStudent(student) {
+	return {
+		type: 'UNSELECT_STUDENT',
+		student: student,
+		id: student.id
+	};
+}
+
+export function toggleSelectAll(filter) {
+	return {
+		type: 'TOGGLE_SELECT_ALL',
+		filter
+	}
 }
