@@ -13,7 +13,7 @@ const Menu = props => {
 
 	const deleteSelection = data => {
 		data.map(student => {
-			deleteStudent(student.toJS().id);
+			return deleteStudent(student.toJS().id);
 		});
 	}
 

@@ -1,12 +1,13 @@
 import Immutable, { List, Map } from 'immutable';
 import { students } from './students';
-import { FormVisibilityFilter, SelectionFilter } from './actions';
+import { FormVisibilityFilter } from './actions';
 
 const initialState = {
 	formVisibility : FormVisibilityFilter.HIDE_FORM,
 	students: students,
 	tmpData: {},
-	selectedData: List([])
+	selectedData: List([]),
+	isAllSelected: false
 }
 
 export default function(state = initialState, action) {
@@ -57,7 +58,7 @@ export default function(state = initialState, action) {
 			});
 
 		case 'SELECT_STUDENT':
-			return Object.assign({}, state, {
+		const newState = Object.assign({}, state, {
 				students: state.students.map(student => {
 					if (student.get('id') === action.id) {
 						return Immutable.fromJS(action.student).set('isSelected', true);
@@ -67,6 +68,24 @@ export default function(state = initialState, action) {
         }),
         selectedData: state.selectedData.push(Map(action.student).set('isSelected', true))
 			});
+			let test;
+			newState.students.forEach(student => {
+				if(!student.get('isSelected')) {
+					return test = false;
+				}
+				return test = true;
+			});
+			return Object.assign({}, newState, {
+				isAllSelected: test
+			});
+			// return Object.assign({}, tmpState, {
+			// 	isAllSelected: state.students.forEach(student => {
+			// 		if (!student.get('isSelected')) {
+			// 			console.log('false');
+			// 			return false;
+			// 		}
+			// 	})
+			// });
 
 		case 'UNSELECT_STUDENT':
 			return Object.assign({}, state, {
@@ -79,7 +98,8 @@ export default function(state = initialState, action) {
         }),
         selectedData: state.selectedData.filter(student => {
           return student.get('id') !== action.id;
-        })
+        }),
+        isAllSelected: false
 			});
 
 		case 'TOGGLE_SELECT_ALL':
@@ -89,7 +109,8 @@ export default function(state = initialState, action) {
 					});
 				return Object.assign({}, state, {
 					students: selectedStudents,
-					selectedData: selectedStudents
+					selectedData: selectedStudents,
+					isAllSelected: true
 				})
 			} else if (action.filter === 'UNSELECT') {
 				return Object.assign({}, state, {
@@ -98,7 +119,8 @@ export default function(state = initialState, action) {
 					}),
 					selectedData: state.selectedData.filter(student => {
 						return false;
-					})
+					}),
+					isAllSelected: false
 				})
 			}
 

@@ -7,12 +7,18 @@
 table {
 	border: 1px solid #ddd;
 	border-collapse: collapse;
+	background-color: #fff;
 }
 
 thead tr th {
 	padding: 10px;
 	background-color: #2cb187;
 	color: #fff;
+}
+
+tbody tr:hover,
+tbody tr.active-row {
+	background-color: #eee;
 }
 
 .checkbox_custom {
@@ -61,7 +67,26 @@ thead tr th {
 	box-shadow: inset 0 0 0 2px #fff;
 }
 
-
 label {
 	margin: 0px;
+}
+
+/*-------- Form animation ---------*/
+
+.fade-enter {
+	opacity: 0.01;
+}
+
+.fade-enter.fade-enter-active {
+	opacity: 1;
+	transition: opacity 500ms ease-in;
+}
+
+.fade-leave {
+	opacity: 1;
+}
+
+.fade-leave.fade-leave-active {
+	opacity: 0.01;
+	transition: opacity 300ms ease-in;
 }

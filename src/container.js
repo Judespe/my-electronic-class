@@ -10,7 +10,8 @@ const StudentsContainer = connect(
 			formVisibility: state.reducer.formVisibility,
 			students: state.reducer.students,
 			tmpData: state.reducer.tmpData,
-			selectedData: state.reducer.selectedData
+			selectedData: state.reducer.selectedData,
+			isAllSelected: state.reducer.isAllSelected
 		};
 	},
 	function mapDispatchToProps(dispatch) {

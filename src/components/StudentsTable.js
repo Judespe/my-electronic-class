@@ -1,4 +1,5 @@
 import React from 'react';
+import { CSSTransitionGroup } from 'react-transition-group'; // type { CSSTransitionGroup }, not CSSTransitionGroup
 
 import Header from './Header';
 import Menu from './Menu';
@@ -14,6 +15,7 @@ let StudentsTable = props => {
 		formVisibility, 
 		tmpData, 
 		selectedData,
+		isAllSelected,
 		editStudent, 
 		updateForm, 
 		addStudent, 
@@ -24,9 +26,6 @@ let StudentsTable = props => {
 		setFormVisibility } = props;
 
 	let isTmpData = tmpData.length > 0;
-		let isSelectedData = selectedData.size > 0;
-	if (selectedData) {
-	}
 
 	const saveForm = values => {
 		if (!isTmpData) {
@@ -54,7 +53,8 @@ let StudentsTable = props => {
 									name="select_all" 
 									id="select_all" 
 									className="checkbox_custom"
-									onChange={isSelectedData ? ()=>toggleSelectAll('UNSELECT') : ()=>toggleSelectAll('SELECT')} />
+									onChange={isAllSelected ? ()=>toggleSelectAll('UNSELECT') : ()=>toggleSelectAll('SELECT')}
+									checked={isAllSelected} />
 								<label htmlFor="select_all" className="checkbox_custom_label" ></label>
 							</th>
 							<th className="col-xs-6">NOM</th>
@@ -72,14 +72,20 @@ let StudentsTable = props => {
 						))}
 					</tbody>
 				</table>
-				{ formVisibility === 'SHOW_FORM' ?
-					<StudentForm 
+				<CSSTransitionGroup
+						transitionName="fade"
+						transitionEnterTimeout={500}
+						transitionLeaveTimeout={300}>
+					{ formVisibility === 'SHOW_FORM' ? 
+						<StudentForm 
 						key={isTmpData ? tmpData[0].id : 'new'}
 						formKey={isTmpData ? tmpData[0].id : 'new'}
 						initialValues={isTmpData ? tmpData[0] : null}
 						saveForm={isTmpData ? editStudent : addStudent}
 						onSubmit={saveForm}
-						setFormVisibility={setFormVisibility} /> : null }
+						setFormVisibility={setFormVisibility} /> 
+					: null }
+				</CSSTransitionGroup>
 			</div>
     </div>
 	);

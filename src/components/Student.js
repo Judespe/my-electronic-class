@@ -17,7 +17,7 @@ const Student = props => {
 	};
 
 	return(
-		<tr className="row">
+		<tr className={student.isSelected ? "active-row row" : "row"}>
 			<td className="col-xs-1 aligncenter">
 				<input 
 					type="checkbox" 
