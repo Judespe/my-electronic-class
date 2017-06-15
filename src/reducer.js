@@ -1,9 +1,10 @@
 import Immutable, { List, Map } from 'immutable';
 import { students } from './students';
-import { FormVisibilityFilter } from './actions';
+import { FormVisibilityFilter, FileVisibilityFilter, toggleSelectAll } from './actions';
 
 const initialState = {
 	formVisibility : FormVisibilityFilter.HIDE_FORM,
+	fileVisibility: FileVisibilityFilter.HIDE_FILE,
 	students: students,
 	tmpData: {},
 	selectedData: List([]),
@@ -23,10 +24,37 @@ export default function(state = initialState, action) {
 			return Object.assign({}, state, {
 				formVisibility: action.filter
 			});
-		
+
+		case 'SET_FILE_VISIBILITY':
+			if (action.filter === 'HIDE_FILE') {
+				return Object.assign({}, state, {
+					fileVisibility: action.filter,
+					tmpData: {}
+				});
+			} 
+			return Object.assign({}, state, {
+				fileVisibility: action.filter
+			});
+
+		case 'VIEW_STUDENT':
+			toggleSelectAll('UNSELECT');
+			return Object.assign({}, state, {
+				fileVisibility: 'SHOW_FILE',
+				tmpData: state.students.filter(student => {
+					return student.get('id') === action.id;
+				}).toJS()
+			});
+
+		case 'ADD_STUDENT':
+			action.student.id = action.id;
+			return Object.assign({}, state, {
+				students: state.students.push(Map(action.student).set('isSelected', false))
+			});
+
 		case 'UPDATE_FORM':
 			return Object.assign({}, state, {
 				formVisibility: 'SHOW_FORM',
+				fileVisibility: 'HIDE_FILE',
 				tmpData: state.students.filter(student => {
           return student.get("id") === action.id;
         }).toJS()
@@ -42,12 +70,6 @@ export default function(state = initialState, action) {
 						return student;
 					}
 				})
-			});
-
-		case 'ADD_STUDENT':
-			action.student.id = action.id;
-			return Object.assign({}, state, {
-				students: state.students.push(Map(action.student).set('isSelected', false))
 			});
 
 		case 'DELETE_STUDENT':
@@ -78,14 +100,6 @@ export default function(state = initialState, action) {
 			return Object.assign({}, newState, {
 				isAllSelected: test
 			});
-			// return Object.assign({}, tmpState, {
-			// 	isAllSelected: state.students.forEach(student => {
-			// 		if (!student.get('isSelected')) {
-			// 			console.log('false');
-			// 			return false;
-			// 		}
-			// 	})
-			// });
 
 		case 'UNSELECT_STUDENT':
 			return Object.assign({}, state, {

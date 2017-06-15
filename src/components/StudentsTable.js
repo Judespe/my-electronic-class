@@ -5,6 +5,7 @@ import Header from './Header';
 import Menu from './Menu';
 import Student from './Student';
 import StudentForm from './StudentForm';
+import StudentFile from './StudentFile';
 
 import './StudentsTable.css';
 
@@ -12,18 +13,21 @@ let StudentsTable = props => {
 
 	const { 
 		students, 
-		formVisibility, 
+		formVisibility,
+		fileVisibility, 
 		tmpData, 
 		selectedData,
 		isAllSelected,
+		viewStudent,
+		addStudent,
 		editStudent, 
 		updateForm, 
-		addStudent, 
 		deleteStudent, 
 		selectStudent, 
 		unselectStudent,
 		toggleSelectAll,
-		setFormVisibility } = props;
+		setFormVisibility,
+		setFileVisibility } = props;
 
 	let isTmpData = tmpData.length > 0;
 
@@ -67,6 +71,7 @@ let StudentsTable = props => {
 								student={student.toJS()}
 								selectStudent={selectStudent}
 								unselectStudent={unselectStudent}
+								viewStudent={viewStudent}
 								updateForm={updateForm}
 								deleteStudent={deleteStudent} />
 						))}
@@ -84,6 +89,12 @@ let StudentsTable = props => {
 						saveForm={isTmpData ? editStudent : addStudent}
 						onSubmit={saveForm}
 						setFormVisibility={setFormVisibility} /> 
+					: null }
+					{ fileVisibility === 'SHOW_FILE' ? 
+						<StudentFile 
+						student={tmpData[0]}
+						updateForm={updateForm}
+						setFileVisibility={setFileVisibility} /> 
 					: null }
 				</CSSTransitionGroup>
 			</div>

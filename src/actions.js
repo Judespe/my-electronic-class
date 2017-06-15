@@ -5,9 +5,9 @@ export const FormVisibilityFilter = {
 	HIDE_FORM: 'HIDE_FORM'
 }
 
-export const SelectionFilter = {
-	SELECT: 'SELECT',
-	UNSELECT: 'UNSELECT'
+export const FileVisibilityFilter = {
+	SHOW_FILE: 'SHOW_FILE',
+	HIDE_FILE: 'HIDE_FILE'
 }
 
 export function setFormVisibility(filter) {
@@ -17,18 +17,25 @@ export function setFormVisibility(filter) {
 	};
 }
 
+export function setFileVisibility(filter) {
+	return {
+		type: 'SET_FILE_VISIBILITY',
+		filter
+	};
+}
+
+export function viewStudent(id) {
+	return {
+		type: 'VIEW_STUDENT',
+		id: id
+	};
+}
+
 export function addStudent(student) {
 	return {
 		type: 'ADD_STUDENT',
 		student: student,
 		id: newId()
-	};
-}
-
-export function deleteStudent(id) {
-	return {
-		type: 'DELETE_STUDENT',
-		id: id
 	};
 }
 
@@ -44,6 +51,13 @@ export function editStudent(student) {
 		type: 'EDIT_STUDENT',
 		student: student,
 		id: student.id
+	};
+}
+
+export function deleteStudent(id) {
+	return {
+		type: 'DELETE_STUDENT',
+		id: id
 	};
 }
 
