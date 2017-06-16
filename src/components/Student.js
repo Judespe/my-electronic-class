@@ -1,5 +1,6 @@
 import React from 'react';
 
+import defaultAvatar from '../static/img/default-avatar.png';
 import './Student.css';
 
 const Student = props => {
@@ -13,9 +14,15 @@ const Student = props => {
 		unselectStudent } = props;
 
 	const avatar = student.avatar;
-	const style = {
-  	backgroundImage: `url(${student.avatar})`
-	};
+	if (avatar) {
+		var style = {
+  		backgroundImage: `url(${avatar})`
+  	}
+	} else {
+  	var style = {
+			backgroundImage: `url(${defaultAvatar})`
+		}
+	}
 
 	return(
 		<tr className={student.isSelected ? "active-row row" : "row"}>
@@ -33,7 +40,7 @@ const Student = props => {
 			</td>
 			<td className="col-xs-6">
 				<div className="student_presentation">
-					<div className={avatar ? "avatar" : "avatar avatar-default"} style={style}></div>
+					<div className="avatar" style={style}></div>
 					<div className="student_general_info">
 						<div className="student_name">
 							<span className="lastName">{student.lastName}</span>
@@ -41,10 +48,10 @@ const Student = props => {
 						</div>
 						<div className="student_contact">
 							<span className="contact_item">
-								<span className="glyphicon glyphicon-envelope"></span>{student.email}
+								<span className="glyphicon glyphicon-envelope"></span>{student.email ? student.email : "Pas d'email enregistré"}
 								</span>
 							<span className="contact_item">
-								<span className="glyphicon glyphicon-earphone"></span>{student.phone}
+								<span className="glyphicon glyphicon-earphone"></span>{student.phone ? student.phone : '--.--.--.--.--'}
 							</span>
 						</div>
 					</div>

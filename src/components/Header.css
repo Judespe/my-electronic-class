@@ -1,5 +1,5 @@
 header {
-	background: url(../assets/img/banner.jpg) no-repeat center fixed;
+	background: url(../static/img/banner.jpg) no-repeat;
 	background-size: cover;
 	color: white;
 	text-align: center;

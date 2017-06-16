@@ -1,5 +1,7 @@
 import React from 'react';
 
+import defaultAvatar from '../static/img/default-avatar.png';
+
 let StudentFile = props => {
 
 	const {
@@ -8,9 +10,15 @@ let StudentFile = props => {
 		setFileVisibility	} = props;
 
 	const avatar = student.avatar;
-	const style = {
-  	backgroundImage: `url(${student.avatar})`
-	};
+	if (avatar) {
+		var style = {
+  		backgroundImage: `url(${avatar})`
+  	}
+	} else {
+  	var style = {
+			backgroundImage: `url(${defaultAvatar})`
+		}
+	}
 
 	return(
 		<div className="file-background">
