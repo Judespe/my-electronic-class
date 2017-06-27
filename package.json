@@ -17,19 +17,26 @@
   },
   "devDependencies": {
     "babel-eslint": "^7.2.3",
+    "babel-jest": "^20.0.3",
     "babel-loader": "^7.0.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
     "css-loader": "^0.28.4",
     "cssnext-loader": "^1.0.1",
+    "enzyme": "^2.9.1",
     "eslint-loader": "^1.8.0",
     "file-loader": "^0.11.2",
+    "jest": "^20.0.4",
     "json-loader": "^0.5.4",
     "react-scripts": "1.0.7",
+    "react-test-renderer": "^15.6.1",
     "style-loader": "^0.18.2"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
+    "test": "jest",
+    "test:watch": "npm test -- --watch",
     "eject": "react-scripts eject"
   }
 }
