@@ -15,7 +15,7 @@ let StudentFile = props => {
   		backgroundImage: `url(${avatar})`
   	}
 	} else {
-  	var style = {
+  	style = {
 			backgroundImage: `url(${defaultAvatar})`
 		}
 	}

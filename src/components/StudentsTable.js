@@ -25,7 +25,7 @@ let StudentsTable = props => {
 		deleteStudent, 
 		selectStudent, 
 		unselectStudent,
-		toggleSelectAll,
+		setToggleFilter,
 		setFormVisibility,
 		setFileVisibility } = props;
 
@@ -57,7 +57,7 @@ let StudentsTable = props => {
 									name="select_all" 
 									id="select_all" 
 									className="checkbox_custom"
-									onChange={isAllSelected ? ()=>toggleSelectAll('UNSELECT') : ()=>toggleSelectAll('SELECT')}
+									onChange={isAllSelected ? ()=>setToggleFilter('UNSELECT') : ()=>setToggleFilter('SELECT')}
 									checked={isAllSelected} />
 								<label htmlFor="select_all" className="checkbox_custom_label" ></label>
 							</th>

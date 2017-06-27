@@ -24,6 +24,12 @@ export function setFileVisibility(filter) {
 	};
 }
 
+export function resetTmpData() {
+	return {
+		type: 'RESET_TMP_DATA'
+	}
+}
+
 export function viewStudent(id) {
 	return {
 		type: 'VIEW_STUDENT',
@@ -77,9 +83,9 @@ export function unselectStudent(student) {
 	};
 }
 
-export function toggleSelectAll(filter) {
+export function setToggleFilter(filter) {
 	return {
-		type: 'TOGGLE_SELECT_ALL',
+		type: 'SET_TOGGLE_FILTER',
 		filter
 	}
 }

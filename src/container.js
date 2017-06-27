@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import StudentsTable from './components/StudentsTable';
 import { 
 	setFormVisibility, 
-	setFileVisibility, 
+	setFileVisibility,
+	resetTmpData, 
 	viewStudent, 
 	addStudent, 
 	editStudent, 
@@ -11,24 +12,25 @@ import {
 	deleteStudent, 
 	selectStudent, 
 	unselectStudent, 
-	toggleSelectAll } from './actions';
+	setToggleFilter } from './actions/actions';
 
 
 const StudentsContainer = connect(
 	function mapStateToProps(state) {
 		return { 
-			formVisibility: state.reducer.formVisibility,
-			fileVisibility: state.reducer.fileVisibility,
-			students: state.reducer.students,
-			tmpData: state.reducer.tmpData,
-			selectedData: state.reducer.selectedData,
-			isAllSelected: state.reducer.isAllSelected
+			formVisibility: state.formVisibilityFilter,
+			fileVisibility: state.fileVisibilityFilter,
+			students: state.students.studentsList,
+			selectedData: state.students.selectedData,
+			isAllSelected: state.students.isAllSelected,
+			tmpData: state.tmpData
 		};
 	},
 	function mapDispatchToProps(dispatch) {
 		return {
 			setFormVisibility: filter => dispatch(setFormVisibility(filter)),
 			setFileVisibility: filter => dispatch(setFileVisibility(filter)),
+			resetTmpData: () => dispatch(resetTmpData()),
 			addStudent: data => dispatch(addStudent(data)),
 			viewStudent: id => dispatch(viewStudent(id)),
 			editStudent: data => dispatch(editStudent(data)),
@@ -36,7 +38,7 @@ const StudentsContainer = connect(
 			deleteStudent: id => dispatch(deleteStudent(id)),
 			selectStudent: data => dispatch(selectStudent(data)),
 			unselectStudent: data => dispatch(unselectStudent(data)),
-			toggleSelectAll: filter => dispatch(toggleSelectAll(filter))
+			setToggleFilter: filter => dispatch(setToggleFilter(filter))
 		};
 	}
 )(StudentsTable);
