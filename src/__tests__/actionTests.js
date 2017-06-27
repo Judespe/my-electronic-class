@@ -1,4 +1,4 @@
-import * as actions from '../actions';
+import * as actions from '../actions/actions';
 
 describe('actions', () => {
 	it('should show a form', () => {

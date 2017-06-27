@@ -1,14 +1,24 @@
 import Immutable, { List, Map, size } from 'immutable';
 
-import reducer from '../reducer';
-import { students } from '../students';
-import { addStudent, deleteStudent } from '../actions';
+import { appReducer as reducer } from '../reducers/appReducer';
+import { studentsReducer } from '../reducers/studentsReducer';
+import { students } from '../fixtures/students';
+import { addStudent, deleteStudent } from '../actions/actions';
 
 let initialState = {
-	formVisibility : 'HIDE_FORM',
-	fileVisibility: 'HIDE_FILE',
-	students: students,
+	formVisibilityFilter : 'HIDE_FORM',
+	fileVisibilityFilter: 'HIDE_FILE',
+	students: {
+		studentsList: students,
+		selectedData: List([]),
+		isAllSelected: false
+	},
 	tmpData: {},
+	form: {}
+}
+
+let studentsState = {
+	studentsList: students,
 	selectedData: List([]),
 	isAllSelected: false
 }
@@ -21,7 +31,7 @@ describe('reducers', () => {
 		})
 
 		it('should add a new student', () => {
-			const finalState = reducer(initialState, {
+			const finalState = studentsReducer(studentsState, {
 				type: 'ADD_STUDENT',
 				student: {
 					lastName: 'TestLastName',
@@ -29,21 +39,21 @@ describe('reducers', () => {
 				},
 				id: 6
 			});
-			const expectedStudentsListSize = initialState.students.size + 1;
+			const expectedStudentsListSize = studentsState.studentsList.size + 1;
 
-			expect(finalState.students.size)
+			expect(finalState.studentsList.size)
 			.toBe(expectedStudentsListSize)
 		})
 
 		it('should delete a student', () => {
-			const expectedStudentsListSize = initialState.students.size - 1;
+			const expectedStudentsListSize = studentsState.studentsList.size - 1;
 
-			const finalState = reducer(initialState, {
+			const finalState = studentsReducer(studentsState, {
 					type: 'DELETE_STUDENT',
 					id: 1
 				});
 
-			expect(finalState.students.size).toBe(expectedStudentsListSize)
+			expect(finalState.studentsList.size).toBe(expectedStudentsListSize)
 		})
 
 	})
