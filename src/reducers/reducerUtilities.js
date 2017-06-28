@@ -1,3 +1,5 @@
+import Immutable from 'immutable';
+
 export function updateObject(oldObject, values) {
 	return Object.assign({}, oldObject, values);
 }
@@ -12,3 +14,16 @@ export function createReducer(initialState, handlers) {
   }
 }
 
+export function setArrayItemsProperty(property, value, array, itemId) {
+	return array.map(item => {
+		if (itemId === undefined) {
+			return Immutable.fromJS(item).set(property, value);
+		} else {
+			if (item.get('id') === itemId) {
+				return Immutable.fromJS(item).set(property, value);
+			} else {
+				return item;
+			}
+		}
+	})
+}

@@ -1,7 +1,6 @@
 import Immutable, { List, Map } from 'immutable';
 import { students } from '../fixtures/students';
-import { updateObject, createReducer } from './reducerUtilities';
-import { setFormVisibility } from '../actions/actions';
+import { updateObject, createReducer, setArrayItemsProperty } from './reducerUtilities';
 
 function addStudent(studentsState,action) {
 	action.student.id = action.id;
@@ -11,7 +10,6 @@ function addStudent(studentsState,action) {
 }
 
 function editStudent(studentsState, action) {
-	setFormVisibility('HIDE_FORM');
 	return updateObject(studentsState, {
 		studentsList: studentsState.studentsList.map(student => {
 			if (student.get('id') === action.id) {
@@ -33,16 +31,11 @@ function deleteStudent(studentsState, action) {
 
 function selectStudent(studentsState, action) {
 	const newState = updateObject(studentsState, {
-		studentsList: studentsState.studentsList.map(student => {
-			if (student.get('id') === action.id) {
-				return Immutable.fromJS(action.student).set('isSelected', true);
-			} else {
-				return student;
-			}
-    }),
+		studentsList: setArrayItemsProperty('isSelected', true, studentsState.studentsList, action.id),
     selectedData: studentsState.selectedData.push(Map(action.student).set('isSelected', true))
 	});
 
+	// Testing if all students are manually selected, then check AllSelected checkbox
 	let test;
 	newState.studentsList.forEach(student => {
 		if(!student.get('isSelected')) {
@@ -57,13 +50,7 @@ function selectStudent(studentsState, action) {
 
 function unselectStudent(studentsState, action) {
 	return updateObject(studentsState, {
-		studentsList: studentsState.studentsList.map(student => {
-			if (student.get('id') === action.id) {
-				return Immutable.fromJS(action.student).set('isSelected', false);
-			} else {
-				return student;
-			}
-    }),
+  	studentsList: setArrayItemsProperty('isSelected', false, studentsState.studentsList, action.id),
     selectedData: studentsState.selectedData.filter(student => {
       return student.get('id') !== action.id;
     }),
@@ -73,9 +60,7 @@ function unselectStudent(studentsState, action) {
 
 function setToggleFilter(studentsState, action) {
 	if (action.filter === 'SELECT') {
-		const selectedStudents = studentsState.studentsList.map(student => {
-				return student.set('isSelected', true)
-			});
+		const selectedStudents = setArrayItemsProperty('isSelected', true, studentsState.studentsList);
 		return updateObject(studentsState, {
 			studentsList: selectedStudents,
 			selectedData: selectedStudents,
@@ -83,9 +68,7 @@ function setToggleFilter(studentsState, action) {
 		})
 	} else if (action.filter === 'UNSELECT') {
 		return updateObject(studentsState, {
-			studentsList: studentsState.studentsList.map(student => {
-				return student.set('isSelected', false)
-			}),
+			studentsList: setArrayItemsProperty('isSelected', false, studentsState.studentsList),
 			selectedData: studentsState.selectedData.filter(student => {
 				return false;
 			}),

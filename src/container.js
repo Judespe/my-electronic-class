@@ -4,7 +4,6 @@ import StudentsTable from './components/StudentsTable';
 import { 
 	setFormVisibility, 
 	setFileVisibility,
-	resetTmpData, 
 	viewStudent, 
 	addStudent, 
 	editStudent, 
@@ -30,7 +29,6 @@ const StudentsContainer = connect(
 		return {
 			setFormVisibility: filter => dispatch(setFormVisibility(filter)),
 			setFileVisibility: filter => dispatch(setFileVisibility(filter)),
-			resetTmpData: () => dispatch(resetTmpData()),
 			addStudent: data => dispatch(addStudent(data)),
 			viewStudent: id => dispatch(viewStudent(id)),
 			editStudent: data => dispatch(editStudent(data)),

@@ -24,17 +24,38 @@ export function setFileVisibility(filter) {
 	};
 }
 
-export function resetTmpData() {
-	return {
-		type: 'RESET_TMP_DATA'
+export function viewStudent(id) {
+	return (dispatch, getState) => {
+		const state = getState();
+		const studentsState = state.students;
+
+		dispatch(setToggleFilter('UNSELECT'));
+		dispatch(setFileVisibility('SHOW_FILE'));
+		dispatch({
+			type: 'VIEW_STUDENT',
+			id: id,
+			payload: {
+				studentsState
+			}			
+		});
 	}
 }
 
-export function viewStudent(id) {
-	return {
-		type: 'VIEW_STUDENT',
-		id: id
-	};
+export function updateForm(id) {
+	return (dispatch, getState) => {
+		const state = getState();
+		const studentsState = state.students;
+
+		dispatch(setFormVisibility('SHOW_FORM'));
+		dispatch(setFileVisibility('HIDE_FILE'));
+		dispatch({
+			type: 'UPDATE_FORM',
+			id: id,
+			payload: {
+				studentsState
+			}			
+		});
+	}
 }
 
 export function addStudent(student) {
@@ -45,19 +66,15 @@ export function addStudent(student) {
 	};
 }
 
-export function updateForm(id) {
-	return {
-		type: 'UPDATE_FORM',
-		id: id
-	};
-}
-
 export function editStudent(student) {
-	return {
-		type: 'EDIT_STUDENT',
-		student: student,
-		id: student.id
-	};
+	return (dispatch) => {
+		dispatch(setFormVisibility('HIDE_FORM'));
+		dispatch({
+			type: 'EDIT_STUDENT',
+			student: student,
+			id: student.id
+		});
+	}
 }
 
 export function deleteStudent(id) {
