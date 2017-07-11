@@ -2,44 +2,45 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import { appReducer } from './reducers/appReducer';
-import { createStore, applyMiddleware, compose } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import { reactReduxFirebase } from 'react-redux-firebase';
+
+import Cookies from 'universal-cookie';
+import { AUTH_USER } from './actions/types';
 
 import './index.css';
 
+import Home from './components/Home';
 import Login from './components/Login';
-import Teacher from './components/Teacher';
+import StudentsContainer from './container';
 import NotFound from './components/NotFound';
 
-// const store = createStore(
-// 	appReducer,
-// 	applyMiddleware(thunk)
-// );
+import RequireAuth from './components/require-auth';
 
-// Firebase config
-const config = {
-	apiKey: "AIzaSyAFLR-fzgCjVM4M4cID4IdU4dY41AmBWzI",
-  authDomain: "my-electronic-class.firebaseapp.com",
-  databaseURL: "https://my-electronic-class.firebaseio.com",
-  storageBucket: "my-electronic-class.appspot.com"
+const cookies = new Cookies();
+const token = cookies.get('token');
+
+const store = createStore(
+	appReducer,
+	applyMiddleware(thunk)
+);
+
+if (token && token !== 'undefined') {
+	store.dispatch({ type: AUTH_USER });
 }
 
-const createStoreWithFirebase = compose(
-	reactReduxFirebase(config, {teacherProfile: 'teachers' }),
-)(createStore);
-
-const store = createStoreWithFirebase(appReducer, applyMiddleware(thunk));
+// console.log(store.getState());
 
 ReactDOM.render(
 	<Provider store={store}>
 		<BrowserRouter>
 			<Switch>
-				<Route exact path="/" component={Login} />
-				<Route path="/teacher/:name" component={Teacher} />
-				<Route component={NotFound} />
+				<Route exact path="/" component={RequireAuth(Home)} />
+				<Route path="/login" component={Login} />
+				<Route path="/dashboard" component={RequireAuth(StudentsContainer)} />
+				<Route path="*" component={NotFound} />
 			</Switch>
 		</BrowserRouter>
 	</Provider>, 
