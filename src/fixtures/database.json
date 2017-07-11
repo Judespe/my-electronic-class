@@ -1,0 +1,28 @@
+{
+	"teachers": {
+		{
+			id: 1,
+			lastName: 'Georges',
+			firstName: 'Mylène',
+			email: 'mylene.georges@lycee-jean-monnet-lyon.com',
+			password: 'mgeorges69009',
+			classes: ['2ndeA', '2ndeB', '1eB', '1eD', 'TermC']
+		},
+		{
+			id: 2,
+			lastName: 'Gaudreau',
+			firstName: 'Yves',
+			email: 'yves.gaudreau@lycee-jean-monnet-lyon.com',
+			password: 'ygaudreau69009',
+			classes: ['2ndeA', '2ndeC', '2ndeD', '1eC', 'TermC']
+		},
+		{
+			id: 3,
+			lastName: 'Julliard',
+			firstName: 'Céline',
+			email: 'celine.julliard@lycee-jean-monnet-lyon.com',
+			password: 'cjulliard69009',
+			classes: ['2ndeE', '1eA', '1eD', 'TermA']
+		}
+	},
+}

@@ -27,7 +27,8 @@ let StudentsTable = props => {
 		unselectStudent,
 		setToggleFilter,
 		setFormVisibility,
-		setFileVisibility } = props;
+		setFileVisibility,
+		logoutUser } = props;
 
 	let isTmpData = tmpData.length > 0;
 
@@ -42,7 +43,7 @@ let StudentsTable = props => {
 
 	return(
     <div className="content">
-      <Header />
+      <Header logoutUser={logoutUser}/>
       <Menu
       	selectedData={selectedData}
       	deleteStudent={deleteStudent} 

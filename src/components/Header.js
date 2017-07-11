@@ -1,14 +1,18 @@
 import React from 'react';
 import './Header.css';
 
-class Header extends React.Component {
-	render() {
-		return(
-			<header className="container-fluid">
-        <h1>Ma Classe Numérique</h1>
-			</header>
-		)
-	}
+const Header = props => {
+
+	const { logoutUser } = props;
+	
+	return(
+		<header className="container-fluid">
+      <h1>Ma Classe Electronique</h1>
+      <div className="logout_button">
+      	<button onClick={()=>{logoutUser()}}>déconnexion</button>
+      </div>
+		</header>
+	)
 }
 
 export default Header;

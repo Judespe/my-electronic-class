@@ -11,7 +11,8 @@ import {
 	deleteStudent, 
 	selectStudent, 
 	unselectStudent, 
-	setToggleFilter } from './actions/actions';
+	setToggleFilter,
+	logoutUser } from './actions/actions';
 
 
 const StudentsContainer = connect(
@@ -36,7 +37,8 @@ const StudentsContainer = connect(
 			deleteStudent: id => dispatch(deleteStudent(id)),
 			selectStudent: data => dispatch(selectStudent(data)),
 			unselectStudent: data => dispatch(unselectStudent(data)),
-			setToggleFilter: filter => dispatch(setToggleFilter(filter))
+			setToggleFilter: filter => dispatch(setToggleFilter(filter)),
+			logoutUser: () => dispatch(logoutUser())
 		};
 	}
 )(StudentsTable);
